@@ -1,17 +1,27 @@
 {
-  "name": "bw-bg",
+  "name": "dual-shades",
   "version": "0.1.0",
   "private": true,
+  "description": "Easily transform photos by keeping the subject colored and changing the background to black and white. Enhance your visuals with a simple touch!",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
+  "author": "Anmol Agrawal <anmol.ag53@gmail.com>",
   "dependencies": {
-    "react": "19.0.0-rc-66855b96-20241106",
-    "react-dom": "19.0.0-rc-66855b96-20241106",
-    "next": "15.0.3"
+    "@imgly/background-removal": "1.5.5",
+    "jimp": "^1.6.0",
+    "mongoose": "^8.8.3",
+    "next-auth": "^4.24.10",
+    "next": "15.0.3",
+    "react-dom": "18.3.1",
+    "react-dropzone": "^14.2.3",
+    "react-tooltip": "^5.27.0",
+    "react": "18.3.1",
+    "stripe": "^17.4.0",
+    "styled-components": "^6.1.11"
   },
   "devDependencies": {
     "eslint": "^8",
