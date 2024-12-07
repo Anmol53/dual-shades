@@ -5,13 +5,13 @@ import Hero from "./components/hero";
 import Pricing from "./components/pricing";
 import Footer from "./components/footer";
 import FAQ from "./components/faq";
+import Examples from "./components/examples";
 
 /**
  * The main component of the landing page.
  * @returns {JSX.Element} The JSX element for the landing page.
  */
 export default function Home() {
-
   // Use effect hook to handle redirect back from Checkout
   useEffect(() => {
     const query = new URLSearchParams(window.location.search);
@@ -33,7 +33,7 @@ export default function Home() {
   return (
     <>
       <Hero />
-      {/* <Samples /> */}
+      <Examples />
       <Pricing />
       <FAQ />
       <Footer />
