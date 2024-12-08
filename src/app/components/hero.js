@@ -99,6 +99,12 @@ const Illustration = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  div {
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(100, 100, 100, 0.2),
+      0 0 15px 5px rgba(100, 100, 100, 0.1);
+  }
 
   @media screen and (max-width: 768px) {
     display: none;
@@ -148,13 +154,12 @@ export default function Hero() {
           </CTA>
         </InnerContainer>
         <Illustration>
-          <BeforeAfterImage $width={"25vw"}>
-            <img src="/raul-varzar-og.jpg"></img>
-            <img src="/raul-varzar-bw.png"></img>
-          </BeforeAfterImage>
-          {/* <img src="/cord-allman-bw.png"></img>
-          <img src="/graca-assane-bw.png"></img> */}
-          {/* <img src="/raul-varzar-bw.png"></img> */}
+          <div>
+            <BeforeAfterImage $width={"25vw"} $height={"40vw"}>
+              <img src="/raul-varzar-og.jpg"></img>
+              <img src="/raul-varzar-bw.png"></img>
+            </BeforeAfterImage>
+          </div>
         </Illustration>
       </Container>
     </StyledHero>

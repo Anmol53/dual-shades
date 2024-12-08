@@ -2,13 +2,8 @@ import styled from "styled-components";
 
 const Container = styled.div`
   width: ${({ $width }) => $width};
-  aspect-ratio: 10 / 16;
+  height: ${({ $height }) => $height};
   position: relative;
-  border-radius: 1rem;
-  border-width: 0px;
-  overflow: hidden;
-  box-shadow: 0 0 10px rgba(100, 100, 100, 0.2),
-    0 0 15px 5px rgba(100, 100, 100, 0.1);
 `;
 
 const ImageContainer = styled.div`
@@ -17,7 +12,7 @@ const ImageContainer = styled.div`
   overflow: hidden;
   img {
     width: ${({ $width }) => $width};
-    aspect-ratio: 10 / 16;
+    height: ${({ $height }) => $height};
     object-fit: cover;
   }
   &:nth-child(2) {
@@ -36,7 +31,7 @@ const Divider = styled.div`
   pointer-events: none;
 `;
 
-export default function BeforeAfterImage({ children, $width }) {
+export default function BeforeAfterImage({ children, $width, $height }) {
   if (children.length !== 2) {
     throw new Error("BeforeAfterImage component expects exactly two children");
   }
@@ -64,9 +59,16 @@ export default function BeforeAfterImage({ children, $width }) {
       className="container"
       onMouseMove={handleSlider}
       $width={$width || "50vw"}
+      $height={$height || "80vw"}
     >
-      <ImageContainer $width={$width || "50vw"}>{children[0]}</ImageContainer>
-      <ImageContainer $width={$width || "50vw"} className="after-container">
+      <ImageContainer $width={$width || "50vw"} $height={$height || "80vw"}>
+        {children[0]}
+      </ImageContainer>
+      <ImageContainer
+        $width={$width || "50vw"}
+        $height={$height || "80vw"}
+        className="after-container"
+      >
         {children[1]}
       </ImageContainer>
       <Divider className="slider" />
