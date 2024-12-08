@@ -3,7 +3,7 @@ import "./globals.css";
 import Script from "next/script";
 import StyledComponentsRegistry from "@/components/wrappers/StyledComponentsRegistry";
 import SessionProviderWrapper from "@/components/wrappers/SessionProviderWrapper";
-import { ImageProvider } from "@/components/wrappers/ImageContext";
+import { GeneratorProvider } from "@/components/wrappers/GeneratorContext";
 /**
  * Creating an instance of Montserrat font with latin subset.
  */
@@ -79,7 +79,7 @@ export default function RootLayout({ children }) {
            * This component is responsible for managing user sessions.
            */}
           <SessionProviderWrapper>
-            <ImageProvider>{children}</ImageProvider>
+            <GeneratorProvider>{children}</GeneratorProvider>
           </SessionProviderWrapper>
         </StyledComponentsRegistry>
       </body>

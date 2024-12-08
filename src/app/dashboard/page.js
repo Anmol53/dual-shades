@@ -2,7 +2,7 @@
 import { useContext, useRef, useState } from "react";
 import styled from "styled-components";
 import FileUpload from "@/components/fileUpload";
-import ImageContext from "@/components/wrappers/ImageContext";
+import GeneratorContext from "@/components/wrappers/GeneratorContext";
 import { removeBackground } from "@imgly/background-removal";
 import { Jimp } from "jimp";
 
@@ -21,6 +21,7 @@ const UploadContainer = styled.div`
  */
 export default function Dashboard() {
   const canvasRef = useRef(null);
+  const { generation, updateGenerator } = useContext(GeneratorContext);
 
   const handleImageOverlay = async (image1Src, image2Src) => {
     const canvas = canvasRef.current;
@@ -55,21 +56,31 @@ export default function Dashboard() {
     const output = canvas.toDataURL("image/png");
     return output;
   };
+
   const generateImage = async (image) => {
     try {
       const inputImageURL = URL.createObjectURL(image);
-      updateImage({
-        inputImageURL,
-        outputImageURL: null,
-        message: "Processing image...",
+      const inputImage = new Image();
+      inputImage.src = inputImageURL;
+      await new Promise((resolve) => {
+        inputImage.onload = resolve;
       });
+      const generationInfo = {
+        ...generation,
+        inputImageURL,
+        status: "processing",
+        height: inputImage.height,
+        width: inputImage.width,
+      };
+
+      updateGenerator(generationInfo);
+
       const foregroundImage = await removeBackground(image);
       const foregroundImageURL = URL.createObjectURL(foregroundImage);
-      updateImage({
-        inputImageURL,
-        outputImageURL: foregroundImageURL,
-        message: "Working...",
-      });
+
+      generationInfo["status"] = "finishing";
+      updateGenerator(generationInfo);
+
       const response = await fetch(inputImageURL, {});
 
       const imageBuffer = await response.arrayBuffer();
@@ -86,25 +97,25 @@ export default function Dashboard() {
 
       const og_img = await handleImageOverlay(bw_image, foregroundImageURL);
 
-      updateImage({
-        inputImageURL: inputImageURL,
-        outputImageURL: og_img,
-        message: "Done",
-      });
+      generationInfo["outputImageURL"] = og_img;
+      generationInfo["status"] = "success";
+      updateGenerator(generationInfo);
     } catch (error) {
+      updateGenerator({
+        ...generation,
+        status: "error",
+      });
       console.log(error);
     }
   };
 
-  const { updateImage } = useContext(ImageContext);
   return (
     <UploadContainer>
       <FileUpload
         onSuccess={async (file) => {
-          updateImage({
-            inputImageURL: null,
-            outputImageURL: null,
-            message: "Uploading image...",
+          updateGenerator({
+            ...generation,
+            status: "uploading",
           });
           generateImage(file[0]);
         }}
