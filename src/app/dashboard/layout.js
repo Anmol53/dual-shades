@@ -7,6 +7,7 @@ import PreviewContainer from "./previewContainer";
 import { Tooltip } from "react-tooltip";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import ThemeWrapper from "@/components/wrappers/ThemeWrapper";
 
 const GradientContainer = styled.div`
   background-color: ${({ $gradient }) => $gradient.backgroundColor};
@@ -74,6 +75,7 @@ const RightContainer = styled.div`
     -5px -5px 30px 7px rgba(0, 0, 0, 0.22), 3px 3px 10px rgba(0, 0, 0, 0.25);
   flex: 5 1 500px;
   aspect-ratio: 16/9;
+  border-radius: 20px;
 `;
 
 const Footer = styled.footer`
@@ -111,45 +113,47 @@ export default function DashboardLayout({ children }) {
 
   // Render the layout with the children, a random gradient background, and a footer
   return (
-    <GradientContainer $gradient={randomGradient}>
-      <Main>
-        <LeftContainer>
-          <Header>
-            <h1>Dual Shades</h1>
-            <Navs>
-              <Link
-                href="/dashboard"
-                className={pathname === "/dashboard" ? "active" : ""}
-              >
-                <i
-                  className="fa-solid fa-wand-magic-sparkles"
-                  data-tooltip-id="generate"
-                  data-tooltip-content="Generate image"
-                ></i>
-              </Link>
-              <Link
-                href="/dashboard/account"
-                className={pathname === "/dashboard/account" ? "active" : ""}
-              >
-                <i
-                  className="fa-regular fa-circle-user"
-                  data-tooltip-id="account-details"
-                  data-tooltip-content="Account"
-                ></i>
-              </Link>
-              <div style={{ fontSize: "0.75rem" }}>
-                <Tooltip id="generate" />
-                <Tooltip id="account-details" />
-              </div>
-            </Navs>
-          </Header>
-          {children}
-        </LeftContainer>
-        <RightContainer>
-          <PreviewContainer />
-        </RightContainer>
-      </Main>
-      <Footer>{<Copyright appName="Dual Shades" />}</Footer>
-    </GradientContainer>
+    <ThemeWrapper>
+      <GradientContainer $gradient={randomGradient}>
+        <Main>
+          <LeftContainer>
+            <Header>
+              <h1>Dual Shades</h1>
+              <Navs>
+                <Link
+                  href="/dashboard"
+                  className={pathname === "/dashboard" ? "active" : ""}
+                >
+                  <i
+                    className="fa-solid fa-wand-magic-sparkles"
+                    data-tooltip-id="generate"
+                    data-tooltip-content="Generate image"
+                  ></i>
+                </Link>
+                <Link
+                  href="/dashboard/account"
+                  className={pathname === "/dashboard/account" ? "active" : ""}
+                >
+                  <i
+                    className="fa-regular fa-circle-user"
+                    data-tooltip-id="account-details"
+                    data-tooltip-content="Account"
+                  ></i>
+                </Link>
+                <div style={{ fontSize: "0.75rem" }}>
+                  <Tooltip id="generate" />
+                  <Tooltip id="account-details" />
+                </div>
+              </Navs>
+            </Header>
+            {children}
+          </LeftContainer>
+          <RightContainer>
+            <PreviewContainer />
+          </RightContainer>
+        </Main>
+        <Footer>{<Copyright appName="Dual Shades" />}</Footer>
+      </GradientContainer>
+    </ThemeWrapper>
   );
 }
