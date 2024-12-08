@@ -3,6 +3,7 @@ import Header from "./header";
 import { Tick } from "@/components/svg";
 import Button from "@/components/button";
 import { redirect } from "next/navigation";
+import BeforeAfterImage from "@/components/beforeAfterImage";
 
 const StyledHero = styled.div`
   background-color: ${({ theme }) => theme.background1};
@@ -97,11 +98,10 @@ const Illustration = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-  img {
-    box-shadow: 0 0 10px rgba(100, 100, 100, 0.2),
-      0 0 15px 5px rgba(100, 100, 100, 0.1);
-    border-radius: 1rem;
-    max-height: 70vh;
+  align-items: center;
+
+  @media screen and (max-width: 768px) {
+    display: none;
   }
 `;
 
@@ -148,9 +148,13 @@ export default function Hero() {
           </CTA>
         </InnerContainer>
         <Illustration>
+          <BeforeAfterImage $width={"25vw"}>
+            <img src="/raul-varzar-og.jpg"></img>
+            <img src="/raul-varzar-bw.png"></img>
+          </BeforeAfterImage>
           {/* <img src="/cord-allman-bw.png"></img>
           <img src="/graca-assane-bw.png"></img> */}
-          <img src="/raul-varzar-bw.png"></img>
+          {/* <img src="/raul-varzar-bw.png"></img> */}
         </Illustration>
       </Container>
     </StyledHero>
