@@ -6,6 +6,12 @@ import Pricing from "./components/pricing";
 import Footer from "./components/footer";
 import FAQ from "./components/faq";
 import Examples from "./components/examples";
+import dynamic from "next/dynamic";
+
+const ThemeWrapper = dynamic(
+  () => import("@/components/wrappers/ThemeWrapper"),
+  { ssr: false }
+);
 
 /**
  * The main component of the landing page.
@@ -31,12 +37,12 @@ export default function Home() {
 
   // Render the landing page
   return (
-    <>
+    <ThemeWrapper>
       <Hero />
       <Examples />
       <Pricing />
       <FAQ />
       <Footer />
-    </>
+    </ThemeWrapper>
   );
 }

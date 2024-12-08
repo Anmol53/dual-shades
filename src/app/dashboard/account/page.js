@@ -60,7 +60,7 @@ export default function Account() {
       .catch((e) => {
         console.error(e);
       });
-  }, []);
+  }, [session.user.plan_id]);
 
   return (
     <>

@@ -3,7 +3,6 @@ import "./globals.css";
 import Script from "next/script";
 import StyledComponentsRegistry from "@/components/wrappers/StyledComponentsRegistry";
 import SessionProviderWrapper from "@/components/wrappers/SessionProviderWrapper";
-import ThemeWrapper from "@/components/wrappers/ThemeWrapper";
 import { ImageProvider } from "@/components/wrappers/ImageContext";
 /**
  * Creating an instance of Montserrat font with latin subset.
@@ -49,9 +48,7 @@ export const metadata = {
         type: "image/png",
       },
     ],
-    apple: [
-      { url: "/apple-icon.png", sizes: "192x192", type: "image/png" },
-    ],
+    apple: [{ url: "/apple-icon.png", sizes: "192x192", type: "image/png" }],
   },
 };
 
@@ -82,9 +79,7 @@ export default function RootLayout({ children }) {
            * This component is responsible for managing user sessions.
            */}
           <SessionProviderWrapper>
-            <ImageProvider>
-              <ThemeWrapper>{children}</ThemeWrapper>
-            </ImageProvider>
+            <ImageProvider>{children}</ImageProvider>
           </SessionProviderWrapper>
         </StyledComponentsRegistry>
       </body>

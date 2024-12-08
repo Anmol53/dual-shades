@@ -61,22 +61,25 @@ export default function FileUpload({ onSuccess }) {
    * @param {File[]} file1 - The dropped file.
    * @returns {void}
    */
-  const onDrop = useCallback(async (file) => {
-    try {
-      onSuccess(file);
-      setStatus("success");
-      setMessage("File uploaded successfully");
-      setIcon("fa-solid fa-check-circle");
-      resetComponent();
-    } catch (error) {
-      console.error(error);
+  const onDrop = useCallback(
+    async (file) => {
+      try {
+        onSuccess(file);
+        setStatus("success");
+        setMessage("File uploaded successfully");
+        setIcon("fa-solid fa-check-circle");
+        resetComponent();
+      } catch (error) {
+        console.error(error);
 
-      setStatus("failure");
-      setMessage("Error uploading file!");
-      setIcon("fa-solid fa-triangle-exclamation");
-      resetComponent();
-    }
-  }, []);
+        setStatus("failure");
+        setMessage("Error uploading file!");
+        setIcon("fa-solid fa-triangle-exclamation");
+        resetComponent();
+      }
+    },
+    [onSuccess]
+  );
 
   // Use react-dropzone to handle file drop
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });

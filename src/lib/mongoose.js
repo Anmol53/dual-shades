@@ -48,10 +48,7 @@ async function connectToDatabase() {
   // Check if a connection promise is already in progress
   if (!cached.promise) {
     // Create a new connection promise
-    cached.promise = mongoose.connect(MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    cached.promise = mongoose.connect(MONGODB_URI);
   }
 
   // Await the connection promise and cache the connection
