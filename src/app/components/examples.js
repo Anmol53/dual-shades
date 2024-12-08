@@ -22,6 +22,10 @@ const Container = styled.div`
 
 const ImageCards = styled.img`
   width: 100%;
+  transition: all 0.3s ease-out;
+  &:hover {
+    transform: scale(1.2);
+  }
 `;
 
 export default function Examples() {
