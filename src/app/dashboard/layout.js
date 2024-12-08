@@ -76,6 +76,7 @@ const RightContainer = styled.div`
   flex: 5 1 500px;
   aspect-ratio: 16/9;
   border-radius: 20px;
+  color: white;
 `;
 
 const Footer = styled.footer`
