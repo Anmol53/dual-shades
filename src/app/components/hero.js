@@ -146,7 +146,7 @@ export default function Hero() {
           <CTA>
             <Button
               onClick={() => {
-                redirect("/dashboard");
+                redirect("/dashboard", "push");
               }}
             >
               Open App
