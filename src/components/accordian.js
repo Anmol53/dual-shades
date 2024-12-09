@@ -1,5 +1,7 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import styled from "styled-components";
+import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
 const AccordionContainer = styled.div``;
 
@@ -60,7 +62,7 @@ export default function Accordion({ items }) {
           >
             {item.title}
             <Chevron $isOpen={openIndex.includes(index)}>
-              <i className="fa-solid fa-chevron-right"></i>
+              <FontAwesomeIcon icon={faChevronRight} />
             </Chevron>
           </AccordionTitle>
           <AccordionContent $isOpen={openIndex.includes(index)}>

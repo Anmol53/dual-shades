@@ -1,11 +1,19 @@
 import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faSquareCaretDown,
+  faCloudArrowUp,
+  faCircleCheck,
+  faTriangleExclamation,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Container = styled.div`
   display: grid;
   grid-gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  justify-items: center;
   text-align: center;
   border-radius: 20px;
   font-size: 1rem;
@@ -28,9 +36,6 @@ const Container = styled.div`
   &:hover {
     filter: grayscale(80%);
   }
-  i {
-    font-size: 3rem;
-  }
 `;
 
 /**
@@ -46,13 +51,13 @@ export default function FileUpload({ onSuccess }) {
   const [message, setMessage] = useState(
     "Drag & Drop your files or Browse here!"
   );
-  const [icon, setIcon] = useState("fa-solid fa-cloud-arrow-up");
+  const [icon, setIcon] = useState(faCloudArrowUp);
 
   const resetComponent = () => {
     setTimeout(() => {
       setStatus(null);
       setMessage("Drag & Drop your files or Browse here!");
-      setIcon("fa-solid fa-cloud-arrow-up");
+      setIcon(faCloudArrowUp);
     }, 2000);
   };
   /**
@@ -67,14 +72,14 @@ export default function FileUpload({ onSuccess }) {
         onSuccess(file);
         setStatus("success");
         setMessage("File uploaded successfully");
-        setIcon("fa-solid fa-check-circle");
+        setIcon(faCircleCheck);
         resetComponent();
       } catch (error) {
         console.error(error);
 
         setStatus("failure");
         setMessage("Error uploading file!");
-        setIcon("fa-solid fa-triangle-exclamation");
+        setIcon(faTriangleExclamation);
         resetComponent();
       }
     },
@@ -90,12 +95,12 @@ export default function FileUpload({ onSuccess }) {
       <input {...getInputProps()} />
       {isDragActive ? (
         <>
-          <i className="fa-solid fa-square-caret-down"></i>
+          <FontAwesomeIcon icon={faSquareCaretDown} size="3x" />
           <p>Drop the files here ...</p>
         </>
       ) : (
         <>
-          <i className={icon}></i>
+          <FontAwesomeIcon icon={icon} size="3x" />
           <p>{message}</p>
         </>
       )}

@@ -8,6 +8,9 @@ import { Tooltip } from "react-tooltip";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ThemeWrapper from "@/components/wrappers/ThemeWrapper";
+import { Wand } from "@/components/svg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleUser } from "@fortawesome/free-regular-svg-icons";
 
 const GradientContainer = styled.div`
   background-color: ${({ $gradient }) => $gradient.backgroundColor};
@@ -60,13 +63,11 @@ const Navs = styled.div`
   gap: 1rem;
   color: white;
   a {
-    color: #aaaaaa;
+    color: gold;
+    filter: grayscale(1);
   }
   a.active {
-    background: linear-gradient(231deg, #ab8d9b, #edcd04);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    filter: grayscale(0);
   }
 `;
 
@@ -124,22 +125,18 @@ export default function DashboardLayout({ children }) {
                 <Link
                   href="/dashboard"
                   className={pathname === "/dashboard" ? "active" : ""}
+                  data-tooltip-id="generate"
+                  data-tooltip-content="Generate image"
                 >
-                  <i
-                    className="fa-solid fa-wand-magic-sparkles"
-                    data-tooltip-id="generate"
-                    data-tooltip-content="Generate image"
-                  ></i>
+                  <Wand style={{ width: "1.5rem", height: "1.5rem" }} />
                 </Link>
                 <Link
                   href="/dashboard/account"
                   className={pathname === "/dashboard/account" ? "active" : ""}
+                  data-tooltip-id="account-details"
+                  data-tooltip-content="Account"
                 >
-                  <i
-                    className="fa-regular fa-circle-user"
-                    data-tooltip-id="account-details"
-                    data-tooltip-content="Account"
-                  ></i>
+                  <FontAwesomeIcon icon={faCircleUser} />
                 </Link>
                 <div style={{ fontSize: "0.75rem" }}>
                   <Tooltip id="generate" />

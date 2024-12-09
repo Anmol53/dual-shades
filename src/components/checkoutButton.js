@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Button from "./button";
 import { useRouter } from "next/navigation";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight, faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 /**
  * A functional component that renders a button for initiating a payment process.
@@ -54,9 +56,9 @@ export default function CheckoutButton({ priceId, label }) {
     <Button onClick={() => handlePayment()}>
       {label ? label : "See It In Action"}&nbsp;&nbsp;
       {isLoading ? (
-        <i className="fa-solid fa-spinner fa-spin"></i>
+        <FontAwesomeIcon icon={faSpinner} spin />
       ) : (
-        <i className="fa-solid fa-arrow-right"></i>
+        <FontAwesomeIcon icon={faArrowRight} />
       )}
     </Button>
   );

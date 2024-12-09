@@ -11,6 +11,10 @@
   },
   "author": "Anmol Agrawal <anmol.ag53@gmail.com>",
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.7.1",
+    "@fortawesome/free-regular-svg-icons": "^6.7.1",
+    "@fortawesome/free-solid-svg-icons": "^6.7.1",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "@imgly/background-removal": "1.5.5",
     "jimp": "^1.6.0",
     "mongoose": "^8.8.3",

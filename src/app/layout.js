@@ -1,6 +1,5 @@
 import { Montserrat } from "next/font/google";
 import "./globals.css";
-import Script from "next/script";
 import StyledComponentsRegistry from "@/components/wrappers/StyledComponentsRegistry";
 import SessionProviderWrapper from "@/components/wrappers/SessionProviderWrapper";
 import { GeneratorProvider } from "@/components/wrappers/GeneratorContext";
@@ -64,10 +63,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <head>
-        {/* Loading FontAwesome script */}
-        <Script src="https://kit.fontawesome.com/9e516a39e2.js"></Script>
-      </head>
+      <head></head>
       <body className={montserrat.className}>
         {/**
          * Custom component for StyledComponentsRegistry.
