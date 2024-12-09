@@ -44,6 +44,10 @@ export default function Account() {
   const [currentPlan, setCurrentPlan] = useState({});
   const [upgrades, setUpgrades] = useState([]);
 
+  const MAX_CREDITS = 2;
+  const remaining_credits =
+    MAX_CREDITS - session.user.usage.current_month_usage;
+
   useEffect(() => {
     fetch("/api/plans/active")
       .then((res) => {
@@ -51,16 +55,18 @@ export default function Account() {
       })
       .then((res) => {
         setCurrentPlan(
-          res.data.filter((plan) => plan.plan_id === session.user.plan_id)[0]
+          res.data.filter(
+            (plan) => plan.plan_id === session.user.plan.plan_id
+          )[0]
         );
         setUpgrades(
-          res.data.filter((plan) => plan.plan_id > session.user.plan_id)
+          res.data.filter((plan) => plan.plan_id > session.user.plan.plan_id)
         );
       })
       .catch((e) => {
         console.error(e);
       });
-  }, [session.user.plan_id]);
+  }, [session.user.plan.plan_id]);
 
   return (
     <>
@@ -73,9 +79,13 @@ export default function Account() {
         </Header>
       ) : (
         <Header>
-          Hi {session.user.name}, you have{" "}
-          <strong>{session.user.credits} credits</strong> remaining. Upgrade
-          your plan today to unlock <strong>unlimited access</strong>!
+          Hi {session.user.name}, you have
+          <strong>
+            {remaining_credits > 0
+              ? ` ${remaining_credits} credits remaining`
+              : " exhausted your credits"}
+          </strong>
+          . Upgrade your plan today to unlock <strong>unlimited access</strong>!
         </Header>
       )}
       {upgrades.length > 0 && (

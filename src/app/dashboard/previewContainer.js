@@ -37,6 +37,9 @@ const Message = styled.div`
  */
 export default function PreviewContainer() {
   const { generation } = useContext(GeneratorContext);
+  useEffect(() => {
+    console.log("In PreviewContainer, images are updated", generation);
+  }, [generation]);
 
   switch (generation.status) {
     case "uploading":
@@ -77,13 +80,27 @@ export default function PreviewContainer() {
           </Message>
         </Container>
       );
+    case "credit-exhausted":
+      return (
+        <Container>
+          <Message>
+            <h2>You’re out of credits.</h2>
+            <p>
+              As a free user, you’ve used up all your available credits. Don’t
+              worry – your credits will be refreshed next month! In the
+              meantime, you can upgrade to a premium plan for instant access to
+              unlimited credits.
+            </p>
+          </Message>
+        </Container>
+      );
     case "error":
       return (
         <Container>
           <Message>
             <h2>Oops! Something went wrong.</h2>
             <p>
-              There was an issue while processing your image. We're looking into
+              There was an issue while processing your image. We’re looking into
               it and will have it fixed soon. Please try again later, or reach
               out to support if the problem persists.
             </p>

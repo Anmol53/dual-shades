@@ -1,10 +1,12 @@
 "use client";
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import FileUpload from "@/components/fileUpload";
 import GeneratorContext from "@/components/wrappers/GeneratorContext";
 import { removeBackground } from "@imgly/background-removal";
 import { Jimp } from "jimp";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 const UploadContainer = styled.div`
   height: 100%;
@@ -22,6 +24,25 @@ const UploadContainer = styled.div`
 export default function Dashboard() {
   const canvasRef = useRef(null);
   const { generation, updateGenerator } = useContext(GeneratorContext);
+  const [generationStatus, setGenerationStatus] = useState({ ...generation });
+  const router = useRouter();
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    updateGenerator(generationStatus);
+  }, [generationStatus]);
+
+  const haveCredits = async () => {
+    let response = false;
+    await fetch("./api/user/can-generate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: session.user.email }),
+    })
+      .then((res) => res.json())
+      .then((res) => (response = res.canGenerate));
+    return response;
+  };
 
   const handleImageOverlay = async (image1Src, image2Src) => {
     const canvas = canvasRef.current;
@@ -65,21 +86,21 @@ export default function Dashboard() {
       await new Promise((resolve) => {
         inputImage.onload = resolve;
       });
-      const generationInfo = {
-        ...generation,
+      setGenerationStatus({
+        ...generationStatus,
         inputImageURL,
         status: "processing",
         height: inputImage.height,
         width: inputImage.width,
-      };
-
-      updateGenerator(generationInfo);
+      });
 
       const foregroundImage = await removeBackground(image);
       const foregroundImageURL = URL.createObjectURL(foregroundImage);
 
-      generationInfo["status"] = "finishing";
-      updateGenerator(generationInfo);
+      setGenerationStatus({
+        ...generationStatus,
+        status: "finishing",
+      });
 
       const response = await fetch(inputImageURL, {});
 
@@ -97,12 +118,20 @@ export default function Dashboard() {
 
       const og_img = await handleImageOverlay(bw_image, foregroundImageURL);
 
-      generationInfo["outputImageURL"] = og_img;
-      generationInfo["status"] = "success";
-      updateGenerator(generationInfo);
+      setGenerationStatus({
+        ...generationStatus,
+        outputImageURL: og_img,
+        status: "success",
+      });
+
+      await fetch("./api/user/consume-credit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: session.user.email }),
+      });
     } catch (error) {
-      updateGenerator({
-        ...generation,
+      setGenerationStatus({
+        ...generationStatus,
         status: "error",
       });
       console.log(error);
@@ -113,8 +142,17 @@ export default function Dashboard() {
     <UploadContainer>
       <FileUpload
         onSuccess={async (file) => {
-          updateGenerator({
-            ...generation,
+          if (!(await haveCredits())) {
+            router.push("/dashboard/account");
+
+            setGenerationStatus({
+              ...generationStatus,
+              status: "credit-exhausted",
+            });
+            return;
+          }
+          setGenerationStatus({
+            ...generationStatus,
             status: "uploading",
           });
           generateImage(file[0]);

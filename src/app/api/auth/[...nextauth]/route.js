@@ -1,4 +1,5 @@
 import connectToDatabase from "@/lib/mongoose";
+import Plan from "@/models/Plan";
 import User from "@/models/User";
 import NextAuth from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
@@ -21,14 +22,15 @@ export const authOptions = {
     async session({ session }) {
       try {
         await connectToDatabase();
-        const currentUser = await User.findOne({ email: session.user.email });
+        const currentUser = await User.findOne({
+          email: session.user.email,
+        }).populate("plan");
 
         if (currentUser) {
           session.user = {
             ...session.user,
             plan: currentUser.plan,
-            plan_id: currentUser.plan_id,
-            credits: currentUser.credits,
+            usage: currentUser.usage,
           };
         }
       } catch (error) {
@@ -40,15 +42,23 @@ export const authOptions = {
       try {
         await connectToDatabase();
         const currentUser = await User.findOne({ email: user.email });
-        
+
         if (!currentUser) {
+          const freePlan = await Plan.findOne({
+            type: "free",
+            status: "active",
+          });
+
           await User.create({
             name: user.name,
             email: user.email,
             image: user.image,
-            credits: 2,
-            plan: "free",
-            plan_id: 1,
+            plan: freePlan._id,
+            usage: {
+              total_usage: 0,
+              current_month_usage: 0,
+              last_used_date: null,
+            },
           });
         } else {
           await User.updateOne(
