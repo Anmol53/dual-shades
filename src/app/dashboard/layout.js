@@ -7,10 +7,15 @@ import PreviewContainer from "./previewContainer";
 import { Tooltip } from "react-tooltip";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import ThemeWrapper from "@/components/wrappers/ThemeWrapper";
+import dynamic from "next/dynamic";
 import { Wand } from "@/components/svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser } from "@fortawesome/free-regular-svg-icons";
+
+const ThemeWrapper = dynamic(
+  () => import("@/components/wrappers/ThemeWrapper"),
+  { ssr: false }
+);
 
 const GradientContainer = styled.div`
   background-color: ${({ $gradient }) => $gradient.backgroundColor};

@@ -76,6 +76,12 @@ export const authOptions = {
       }
     },
   },
+  theme: {
+    logo: "/icons/apple-icon.png",
+  },
+  pages: {
+    signIn: "/auth/signin",
+  },
   // Add additional NextAuth.js configuration here
 };
 
