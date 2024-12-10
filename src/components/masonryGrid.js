@@ -4,9 +4,15 @@ const MasonryContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-height: 300vh;
+  max-height: 400vh;
   gap: 1rem;
   flex-wrap: wrap;
+  @media screen and (max-width: 1024px) {
+    max-height: 450vh;
+  }
+  @media screen and (max-width: 768px) {
+    max-height: 100%;
+  }
 `;
 
 const MasonryCard = styled.div`
@@ -17,6 +23,12 @@ const MasonryCard = styled.div`
   line-height: 0;
   box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2), 0 0 50px rgba(0, 0, 0, 0.2),
     0 0 100px -50px ${({ theme }) => theme.headingHighlightText};
+  @media screen and (max-width: 1024px) {
+    width: 48%;
+  }
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 export default function MasonryGrid({ children }) {

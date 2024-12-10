@@ -38,14 +38,19 @@ export default function Examples() {
           <ImageCards src="/pexels-maxavans-bw.png"></ImageCards>
           <ImageCards src="/haniel-espinal-bw.png"></ImageCards>
           <ImageCards src="/moosa-moseneke-bw.png"></ImageCards>
+          <ImageCards src="/dual-shades-1733777258385.png"></ImageCards>
           <ImageCards src="/luise-and-nic-bw.png"></ImageCards>
           <ImageCards src="/calvin-visuals-bw.png"></ImageCards>
           <ImageCards src="/tim-mossholder-bw.png"></ImageCards>
           <ImageCards src="/graca-assane-bw.png"></ImageCards>
-          <ImageCards src="/courtney-cook-bw.png"></ImageCards>
-          <ImageCards src="/guilherme-stecanella-bw.png"></ImageCards>
           <ImageCards src="/amos-bar-zeev-bw.png"></ImageCards>
+          <ImageCards src="/dual-shades-1733779248087.png"></ImageCards>
+          <ImageCards src="/dual-shades-1733844835186.png"></ImageCards>
+          <ImageCards src="/guilherme-stecanella-bw.png"></ImageCards>
+          <ImageCards src="/courtney-cook-bw.png"></ImageCards>
+          <ImageCards src="/dual-shades-violin.png"></ImageCards>
           <ImageCards src="/cord-allman-bw.png"></ImageCards>
+          <ImageCards src="/dual-shades-1733777073778.png"></ImageCards>
           <ImageCards src="/pexels-mayday-bw.png"></ImageCards>
         </MasonryGrid>
       </Container>
