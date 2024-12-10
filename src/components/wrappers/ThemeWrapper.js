@@ -5,11 +5,11 @@ import { ThemeProvider } from "styled-components";
 
 const theme = {
   light: {
-    text: "#5c5b61",
-    headingHighlightText: "#0f484f",
-    background1: "#ebfdfd",
+    text: "#3a4e56",
+    headingHighlightText: "#77B0AA",
+    background1: "#e0f7fa",
     background2: "#ffffff",
-    accentColor: "#46b5bc",
+    accentColor: "#008b8b",
     textOnAccent: "#ffffff",
   },
   dark: {
@@ -60,7 +60,7 @@ const usePreferredColorScheme = () => {
  *
  * @returns {React.ReactElement} - The wrapped children components with the appropriate theme applied.
  */
-export default function ThemeWrapper({ children, forceMode }) {
+export default function ThemeWrapper({ children }) {
   let isDarkMode = usePreferredColorScheme();
 
   return (

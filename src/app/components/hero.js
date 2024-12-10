@@ -118,8 +118,7 @@ export default function Hero() {
       <Container>
         <InnerContainer>
           <Heading>
-            Bring Your <span>Photos</span> to Life with <span>Color</span>{" "}
-            Focus.
+            Turn your Simple <span>Photos</span> into <span>Stunning</span> Visuals.
           </Heading>
           <Subheading>
             Highlight what matters most—keep your subject in vibrant color and
