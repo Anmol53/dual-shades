@@ -86,6 +86,11 @@ export default function Footer() {
             <h3>Links</h3>
             <ul>
               <li>
+                <Link href={"mailto:contact@dual-shades.com"} target="_blank">
+                  Contact
+                </Link>
+              </li>
+              <li>
                 <Link href={"#pricing"}>Pricing</Link>
               </li>
               <li>
@@ -102,9 +107,6 @@ export default function Footer() {
               </li>
               <li>
                 <Link href={"/tos"}>Terms of Services</Link>
-              </li>
-              <li>
-                <Link href={"/license"}>License</Link>
               </li>
             </ul>
           </StyledSubsection>
