@@ -11,6 +11,7 @@ import dynamic from "next/dynamic";
 import { Wand } from "@/components/svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser } from "@fortawesome/free-regular-svg-icons";
+import Image from "next/image";
 
 const ThemeWrapper = dynamic(
   () => import("@/components/wrappers/ThemeWrapper"),
@@ -68,12 +69,25 @@ const Navs = styled.div`
   gap: 1rem;
   color: white;
   a {
-    color: gold;
-    filter: grayscale(1);
+    transition: all 0.5s ease-out;
+    border-bottom: 2px solid transparent;
+    color: ${({ theme }) => theme.accentColor};
   }
   a.active {
+    border-bottom: 2px solid ${({ theme }) => theme.accentColor};
+  }
+  a svg {
+    filter: grayscale(1);
+  }
+  a.active svg {
     filter: grayscale(0);
   }
+`;
+
+const Avatar = styled(Image)`
+  border-radius: 50%;
+  box-shadow: 1px 1px 6px 2px rgba(0, 0, 0, 0.25),
+    -1px -1px 6px 2px rgba(0, 0, 0, 0.22);
 `;
 
 const RightContainer = styled.div`
@@ -133,7 +147,7 @@ export default function DashboardLayout({ children }) {
                   data-tooltip-id="generate"
                   data-tooltip-content="Generate image"
                 >
-                  <Wand style={{ width: "1.5rem", height: "1.5rem" }} />
+                  <Wand style={{ width: "1.75rem", height: "1.75rem" }} />
                 </Link>
                 <Link
                   href="/dashboard/account"
@@ -141,7 +155,11 @@ export default function DashboardLayout({ children }) {
                   data-tooltip-id="account-details"
                   data-tooltip-content="Account"
                 >
-                  <FontAwesomeIcon icon={faCircleUser} />
+                  {session?.user?.image ? (
+                    <Avatar src={session.user.image} height={32} width={32} />
+                  ) : (
+                    <FontAwesomeIcon icon={faCircleUser} size="xl" />
+                  )}
                 </Link>
                 <div style={{ fontSize: "0.75rem" }}>
                   <Tooltip id="generate" />
