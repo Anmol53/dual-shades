@@ -48,17 +48,17 @@ const faqs = [
   {
     title: "What is Dual Shades?",
     content:
-      "Dual Shades is a photo editing app that allows you to keep your subject in vibrant color while converting the background to black and white.",
+      "Dual Shades is a photo editing app that lets you keep your subject in vibrant color while turning the background black and white.",
   },
   {
     title: "How does Dual Shades work?",
     content:
-      "Dual Shades uses AI technology to detect the subject of your photo, keeping it in full color and automatically converting the background to grayscale.",
+      "Dual Shades uses AI technology to detect the subject of your photo, keeping it in full color and converting the background to grayscale automatically.",
   },
   {
     title: "Do I need an account to use Dual Shades?",
     content:
-      "Yes, creating an account is required to use Dual Shades, but you don’t need to provide payment details for the free plan.",
+      "Yes, account creation is mandatory to use Dual Shades, but no payment details are required for the free tier.",
   },
   {
     title: "What is included in the Starter Plan?",
@@ -68,27 +68,27 @@ const faqs = [
   {
     title: "What is the difference between the Unlimited and Forever plans?",
     content:
-      "The Unlimited Plan provides unlimited credits on a monthly basis, while the Forever Plan offers lifetime access for a one-time fee.",
+      "The Unlimited Plan gives you unlimited credits on a monthly basis, while the Forever Plan offers lifetime access for a one-time fee.",
   },
   {
     title: "What file formats does Dual Shades support?",
     content:
-      "Dual Shades supports common image formats, including JPEG, PNG, and GIF.",
+      "Dual Shades supports popular image formats such as JPEG, JPG, PNG, and WEBP.",
   },
   {
     title: "How can I save and share my edited photos?",
     content:
-      "You can easily download your edited photos in high resolution with just a single click.",
+      "You can download your edited photos in high resolution with a single click.",
   },
   {
     title: "How do I cancel my subscription?",
     content:
-      "You can cancel your subscription anytime through your account settings, and you won’t be charged for the next billing cycle.",
+      "You can cancel your subscription at any time through your account settings, and you will not be charged for the next billing cycle.",
   },
   {
     title: "I have another question",
     content:
-      "If you have any other questions, feel free to contact us at <a href='mailto:support@dual-shades.com'>support@dual-shades.com</a>. We’re happy to help!",
+      "If you have any other questions, feel free to contact us at <a href='mailto:contact@dual-shades.com'>contact@dual-shades.com</a>. We're here to help!",
   },
 ];
 export default function FAQ() {
