@@ -8,7 +8,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   height: 100vh;
-  background-image: url("/dual-shades-1733774031163.png");
+  background-image: url("/assets/examples/dual-shades-1733774031163.png");
   background-size: cover;
   background-position: center top;
 
@@ -97,7 +97,7 @@ export default function LoginPage({ searchParams }) {
               signIn("google", { callbackUrl: callbackUrl || "/" })
             }
           >
-            <Icon src="/google.png" alt="Google Logo" />
+            <Icon src="/assets/logos/google.png" alt="Google Logo" />
             Sign in with Google
           </Button>
           <ButtonDark
@@ -105,7 +105,7 @@ export default function LoginPage({ searchParams }) {
               signIn("github", { callbackUrl: callbackUrl || "/" })
             }
           >
-            <Icon src="/github-mark-white.png" alt="GitHub Logo" />
+            <Icon src="/assets/logos/github-mark-white.png" alt="GitHub Logo" />
             Sign in with GitHub
           </ButtonDark>
         </Card>

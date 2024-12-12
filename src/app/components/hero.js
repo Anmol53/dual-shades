@@ -155,8 +155,8 @@ export default function Hero() {
         <Illustration>
           <div>
             <BeforeAfterImage $width={"25vw"} $height={"40vw"}>
-              <img src="/raul-varzar-og.jpg"></img>
-              <img src="/raul-varzar-bw.png"></img>
+              <img src="/assets/examples/raul-varzar-og.jpg"></img>
+              <img src="/assets/examples/raul-varzar-bw.png"></img>
             </BeforeAfterImage>
           </div>
         </Illustration>
