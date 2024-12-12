@@ -48,7 +48,6 @@ export default function BeforeAfterImage({ children, $width, $height }) {
     if (posX + 50 > size) {
       posX = size;
     }
-    console.log();
 
     afterContainer.style.width = posX + "px";
     slider.style.left = posX + "px";

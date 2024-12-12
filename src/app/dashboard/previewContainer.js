@@ -37,9 +37,6 @@ const Message = styled.div`
  */
 export default function PreviewContainer() {
   const { generation } = useContext(GeneratorContext);
-  useEffect(() => {
-    console.log("In PreviewContainer, images are updated", generation);
-  }, [generation]);
 
   switch (generation.status) {
     case "uploading":
