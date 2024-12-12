@@ -43,11 +43,11 @@ export default function PreviewContainer() {
       return (
         <Container>
           <Message>
-            <h2>Analyzing your image...</h2>
+            <h2>Analyzing your image... 🔍</h2>
             <p>
-              Analyzing your image to understand its structure and prepare it
-              for processing. This may take a moment, depending on the size and
-              complexity of the file. Please bear with us!
+              We're diving into your image to understand its structure and
+              prepare it for processing. This might take a moment—thanks for
+              your patience! ⏳
             </p>
           </Message>
         </Container>
@@ -56,11 +56,10 @@ export default function PreviewContainer() {
       return (
         <Container>
           <Message>
-            <h2>Processing your image...</h2>
+            <h2>Processing your image... 🛠️</h2>
             <p>
-              Applying the necessary adjustments and enhancements to your image.
-              This step may take a little time, so thanks for your patience as
-              we work to transform your image!
+              We're applying some magic to transform your image! This may take a
+              little time, but we promise it'll be worth the wait. ✨
             </p>
           </Message>
         </Container>
@@ -69,10 +68,10 @@ export default function PreviewContainer() {
       return (
         <Container>
           <Message>
-            <h2>Finishing up...</h2>
+            <h2>Finishing up... 🎉</h2>
             <p>
-              Almost done! Just a few final touches are being made. Your image
-              will be ready shortly.
+              Almost there! Just a few final touches and your masterpiece will
+              be ready in no time. 🚀
             </p>
           </Message>
         </Container>
@@ -81,12 +80,23 @@ export default function PreviewContainer() {
       return (
         <Container>
           <Message>
-            <h2>You’re out of credits.</h2>
+            <h2>You’re out of credits. 😔</h2>
             <p>
-              As a free user, you’ve used up all your available credits. Don’t
-              worry – your credits will be refreshed next month! In the
-              meantime, you can upgrade to a premium plan for instant access to
-              unlimited credits.
+              You've used up all your free credits for this month. Don’t
+              worry—credits refresh monthly, or you can upgrade to a premium
+              plan for unlimited access. 🌟
+            </p>
+          </Message>
+        </Container>
+      );
+    case "invalid-format":
+      return (
+        <Container>
+          <Message>
+            <h2>Invalid File Format 🚫</h2>
+            <p>
+              Oops! That file type isn’t supported. Please upload a JPEG, JPG,
+              PNG, or WEBP image—we can’t wait to work on it! 🎨
             </p>
           </Message>
         </Container>
@@ -95,11 +105,11 @@ export default function PreviewContainer() {
       return (
         <Container>
           <Message>
-            <h2>Oops! Something went wrong.</h2>
+            <h2>Oops! Something went wrong. 😕</h2>
             <p>
-              There was an issue while processing your image. We’re looking into
-              it and will have it fixed soon. Please try again later, or reach
-              out to support if the problem persists.
+              Looks like there was an issue processing your image. We're on it!
+              Please try again later or contact support if the issue persists.
+              📩
             </p>
           </Message>
         </Container>
@@ -132,11 +142,10 @@ export default function PreviewContainer() {
       return (
         <Container>
           <Message>
-            <h2>Upload an image to begin!</h2>
+            <h2>Upload an image to begin! 📤</h2>
             <p>
-              Simply choose an image from your device, and{" "}
-              <strong>Dual Shades</strong> take it from there. Ready to get
-              started?
+              Choose an image from your device, and <strong>Dual Shades</strong>{" "}
+              will take care of the rest. Ready to see the magic? 🌈
             </p>
           </Message>
         </Container>

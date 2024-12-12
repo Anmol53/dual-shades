@@ -102,6 +102,23 @@ export default function Dashboard() {
     <UploadContainer>
       <FileUpload
         onSuccess={async (file) => {
+          // return error message if file is not  "image/jpeg", "image/jpg", "image/png" or "image/webp"
+          if (
+            ["image/jpeg", "image/jpg", "image/png", "image/webp"].indexOf(
+              file[0].type
+            ) === -1
+          ) {
+            updateGenerator({
+              inputImageURL: null,
+              outputImageURL: null,
+              status: "invalid-format",
+              height: null,
+              width: null,
+            });
+            return;
+          }
+
+          // return error if user does not have enough credits to generate an image
           if (!(await haveCredits())) {
             router.push("/dashboard/account");
             updateGenerator({

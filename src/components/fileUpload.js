@@ -49,14 +49,14 @@ export default function FileUpload({ onSuccess }) {
   // State variables for status, message, and icon
   const [status, setStatus] = useState(null);
   const [message, setMessage] = useState(
-    "Drag & Drop your files or Browse here!"
+    "Drag & Drop your file or Browse here!"
   );
   const [icon, setIcon] = useState(faCloudArrowUp);
 
   const resetComponent = () => {
     setTimeout(() => {
       setStatus(null);
-      setMessage("Drag & Drop your files or Browse here!");
+      setMessage("Drag & Drop your file or Browse here!");
       setIcon(faCloudArrowUp);
     }, 2000);
   };
