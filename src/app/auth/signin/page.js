@@ -1,14 +1,8 @@
 "use client";
 
 import { signIn } from "next-auth/react";
-import dynamic from "next/dynamic";
 import React from "react";
 import styled from "styled-components";
-
-const ThemeWrapper = dynamic(
-  () => import("@/components/wrappers/ThemeWrapper"),
-  { ssr: false }
-);
 
 const Container = styled.div`
   display: flex;
@@ -92,32 +86,30 @@ export default function LoginPage({ searchParams }) {
   const { callbackUrl } = React.use(searchParams);
 
   return (
-    <ThemeWrapper>
-      <Container>
-        <LeftContainer>
-          <Card>
-            <Logo src="/icons/apple-icon.png" alt="App Logo" />
-            <h2>Dual Shades</h2>
-            <p>Sign in to your account</p>
-            <Button
-              onClick={() =>
-                signIn("google", { callbackUrl: callbackUrl || "/" })
-              }
-            >
-              <Icon src="/google.png" alt="Google Logo" />
-              Sign in with Google
-            </Button>
-            <ButtonDark
-              onClick={() =>
-                signIn("github", { callbackUrl: callbackUrl || "/" })
-              }
-            >
-              <Icon src="/github-mark-white.png" alt="GitHub Logo" />
-              Sign in with GitHub
-            </ButtonDark>
-          </Card>
-        </LeftContainer>
-      </Container>
-    </ThemeWrapper>
+    <Container>
+      <LeftContainer>
+        <Card>
+          <Logo src="/icons/apple-icon.png" alt="App Logo" />
+          <h2>Dual Shades</h2>
+          <p>Sign in to your account</p>
+          <Button
+            onClick={() =>
+              signIn("google", { callbackUrl: callbackUrl || "/" })
+            }
+          >
+            <Icon src="/google.png" alt="Google Logo" />
+            Sign in with Google
+          </Button>
+          <ButtonDark
+            onClick={() =>
+              signIn("github", { callbackUrl: callbackUrl || "/" })
+            }
+          >
+            <Icon src="/github-mark-white.png" alt="GitHub Logo" />
+            Sign in with GitHub
+          </ButtonDark>
+        </Card>
+      </LeftContainer>
+    </Container>
   );
 }

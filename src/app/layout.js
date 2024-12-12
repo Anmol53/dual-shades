@@ -1,8 +1,5 @@
 import { Montserrat } from "next/font/google";
-import "./globals.css";
-import StyledComponentsRegistry from "@/components/wrappers/StyledComponentsRegistry";
-import SessionProviderWrapper from "@/components/wrappers/SessionProviderWrapper";
-import { GeneratorProvider } from "@/components/wrappers/GeneratorContext";
+import RootLayoutClient from "./RootLayoutClient";
 /**
  * Creating an instance of Montserrat font with latin subset.
  */
@@ -52,32 +49,20 @@ export const metadata = {
 };
 
 /**
- * RootLayout is the main layout component for the Next.js application.
- * It wraps the children components with necessary providers and scripts.
+ * The RootLayout component is the main layout wrapper for the Next.js application.
+ * It sets up the HTML structure, and renders the children components.
  *
- * @param {Object} props - The props passed to the component.
+ * @param {Object} props - The component props.
  * @param {React.ReactNode} props.children - The child components to be rendered within the layout.
  *
- * @returns {React.ReactElement} - The root layout component with the wrapped children.
+ * @returns {React.ReactElement} - The RootLayout component with the HTML structure and children components.
  */
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head></head>
       <body className={montserrat.className}>
-        {/**
-         * Custom component for StyledComponentsRegistry.
-         * This component is responsible for registering global styles and themes.
-         */}
-        <StyledComponentsRegistry>
-          {/**
-           * Custom component for SessionProviderWrapper.
-           * This component is responsible for managing user sessions.
-           */}
-          <SessionProviderWrapper>
-            <GeneratorProvider>{children}</GeneratorProvider>
-          </SessionProviderWrapper>
-        </StyledComponentsRegistry>
+        <RootLayoutClient>{children}</RootLayoutClient>
       </body>
     </html>
   );

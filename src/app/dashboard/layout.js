@@ -7,16 +7,10 @@ import PreviewContainer from "./previewContainer";
 import { Tooltip } from "react-tooltip";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import dynamic from "next/dynamic";
 import { Wand } from "@/components/svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser } from "@fortawesome/free-regular-svg-icons";
 import Image from "next/image";
-
-const ThemeWrapper = dynamic(
-  () => import("@/components/wrappers/ThemeWrapper"),
-  { ssr: false }
-);
 
 const GradientContainer = styled.div`
   background-color: ${({ $gradient }) => $gradient.backgroundColor};
@@ -134,52 +128,50 @@ export default function DashboardLayout({ children }) {
 
   // Render the layout with the children, a random gradient background, and a footer
   return (
-    <ThemeWrapper>
-      <GradientContainer $gradient={randomGradient}>
-        <Main>
-          <LeftContainer>
-            <Header>
-              <h1>Dual Shades</h1>
-              <Navs>
-                <Link
-                  href="/dashboard"
-                  className={pathname === "/dashboard" ? "active" : ""}
-                  data-tooltip-id="generate"
-                  data-tooltip-content="Generate image"
-                >
-                  <Wand style={{ width: "1.75rem", height: "1.75rem" }} />
-                </Link>
-                <Link
-                  href="/dashboard/account"
-                  className={pathname === "/dashboard/account" ? "active" : ""}
-                  data-tooltip-id="account-details"
-                  data-tooltip-content="Account"
-                >
-                  {session?.user?.image ? (
-                    <Avatar
-                      src={session.user.image}
-                      height={32}
-                      width={32}
-                      alt={"Use profile image"}
-                    />
-                  ) : (
-                    <FontAwesomeIcon icon={faCircleUser} size="xl" />
-                  )}
-                </Link>
-                <div style={{ fontSize: "0.75rem" }}>
-                  <Tooltip id="generate" />
-                  <Tooltip id="account-details" />
-                </div>
-              </Navs>
-            </Header>
-            {children}
-          </LeftContainer>
-          <RightContainer>
-            <PreviewContainer />
-          </RightContainer>
-        </Main>
-        <Footer>{<Copyright appName="Dual Shades" />}</Footer>
-      </GradientContainer>
-    </ThemeWrapper>
+    <GradientContainer $gradient={randomGradient}>
+      <Main>
+        <LeftContainer>
+          <Header>
+            <h1>Dual Shades</h1>
+            <Navs>
+              <Link
+                href="/dashboard"
+                className={pathname === "/dashboard" ? "active" : ""}
+                data-tooltip-id="generate"
+                data-tooltip-content="Generate image"
+              >
+                <Wand style={{ width: "1.75rem", height: "1.75rem" }} />
+              </Link>
+              <Link
+                href="/dashboard/account"
+                className={pathname === "/dashboard/account" ? "active" : ""}
+                data-tooltip-id="account-details"
+                data-tooltip-content="Account"
+              >
+                {session?.user?.image ? (
+                  <Avatar
+                    src={session.user.image}
+                    height={32}
+                    width={32}
+                    alt={"Use profile image"}
+                  />
+                ) : (
+                  <FontAwesomeIcon icon={faCircleUser} size="xl" />
+                )}
+              </Link>
+              <div style={{ fontSize: "0.75rem" }}>
+                <Tooltip id="generate" />
+                <Tooltip id="account-details" />
+              </div>
+            </Navs>
+          </Header>
+          {children}
+        </LeftContainer>
+        <RightContainer>
+          <PreviewContainer />
+        </RightContainer>
+      </Main>
+      <Footer>{<Copyright appName="Dual Shades" />}</Footer>
+    </GradientContainer>
   );
 }
