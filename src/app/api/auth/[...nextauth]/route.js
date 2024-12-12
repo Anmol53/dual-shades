@@ -77,7 +77,7 @@ export const authOptions = {
     },
   },
   theme: {
-    logo: "/icons/apple-icon.png",
+    logo: "/web-app-manifest-512x512.png",
   },
   pages: {
     signIn: "/auth/signin",

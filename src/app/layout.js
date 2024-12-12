@@ -28,24 +28,7 @@ export const metadata = {
   creator: "Anmol Agrawal",
   publisher: "Anmol Agrawal",
   robots: "index, follow",
-
-  // Icon metadata
-  icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "16x16 32x32 48x48", type: "image/x-icon" },
-      {
-        url: "/icons/android-icon-192x192.png",
-        sizes: "192x192",
-        type: "image/png",
-      },
-      {
-        url: "/icons/android-icon-512x512.png",
-        sizes: "512x512",
-        type: "image/png",
-      },
-    ],
-    apple: [{ url: "/apple-icon.png", sizes: "192x192", type: "image/png" }],
-  },
+  manifest: "./manifest.json",
 };
 
 /**

@@ -89,7 +89,7 @@ export default function LoginPage({ searchParams }) {
     <Container>
       <LeftContainer>
         <Card>
-          <Logo src="/icons/apple-icon.png" alt="App Logo" />
+          <Logo src="/web-app-manifest-512x512.png" alt="App Logo" />
           <h2>Dual Shades</h2>
           <p>Sign in to your account</p>
           <Button
