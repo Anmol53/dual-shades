@@ -156,7 +156,12 @@ export default function DashboardLayout({ children }) {
                   data-tooltip-content="Account"
                 >
                   {session?.user?.image ? (
-                    <Avatar src={session.user.image} height={32} width={32} />
+                    <Avatar
+                      src={session.user.image}
+                      height={32}
+                      width={32}
+                      alt={"Use profile image"}
+                    />
                   ) : (
                     <FontAwesomeIcon icon={faCircleUser} size="xl" />
                   )}
