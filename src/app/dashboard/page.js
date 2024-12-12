@@ -1,12 +1,12 @@
 "use client";
-import { useContext, useRef } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
 import FileUpload from "@/components/fileUpload";
 import GeneratorContext from "@/components/wrappers/GeneratorContext";
 import { removeBackground } from "@imgly/background-removal";
-import { Jimp } from "jimp";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { greyscaleImage, mergeImage } from "@/utils/image-processor";
 
 const UploadContainer = styled.div`
   height: 100%;
@@ -22,8 +22,7 @@ const UploadContainer = styled.div`
  * @returns {JSX.Element} - The JSX element to render the Dashboard component.
  */
 export default function Dashboard() {
-  const canvasRef = useRef(null);
-  const { generation, updateGenerator } = useContext(GeneratorContext);
+  const { updateGenerator } = useContext(GeneratorContext);
   const router = useRouter();
   const { data: session } = useSession();
 
@@ -37,40 +36,6 @@ export default function Dashboard() {
       .then((res) => res.json())
       .then((res) => (response = res.canGenerate));
     return response;
-  };
-
-  const handleImageOverlay = async (image1Src, image2Src) => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
-
-    // Load the images
-    const img1 = new Image();
-    const img2 = new Image();
-
-    img1.src = image1Src;
-    img2.src = image2Src;
-
-    await new Promise((resolve) => {
-      img1.onload = resolve;
-    });
-    await new Promise((resolve) => {
-      img2.onload = resolve;
-    });
-
-    // Set canvas size to match the images
-    canvas.width = img1.width;
-    canvas.height = img1.height;
-
-    // Draw the first image
-    ctx.drawImage(img1, 0, 0);
-
-    // Draw the second image with some transparency
-    ctx.globalAlpha = 1; // Adjust for desired transparency
-    ctx.drawImage(img2, 0, 0);
-
-    // Get the resulting image as a data URL
-    const output = canvas.toDataURL("image/png");
-    return output;
   };
 
   const generateImage = async (image) => {
@@ -89,8 +54,10 @@ export default function Dashboard() {
         width: inputImage.width,
       });
 
-      const foregroundImage = await removeBackground(image);
-      const foregroundImageURL = URL.createObjectURL(foregroundImage);
+      const [subject, bw_image] = await Promise.all([
+        removeBackground(image),
+        greyscaleImage(inputImage),
+      ]);
 
       updateGenerator({
         inputImageURL,
@@ -100,25 +67,15 @@ export default function Dashboard() {
         width: inputImage.width,
       });
 
-      const response = await fetch(inputImageURL, {});
-
-      const imageBuffer = await response.arrayBuffer();
-
-      const response2 = await fetch(foregroundImageURL, {});
-
-      const imageBuffer2 = await response2.arrayBuffer();
-
-      const img = await Jimp.fromBuffer(imageBuffer);
-
-      img.greyscale();
-
-      const bw_image = await img.getBase64("image/png");
-
-      const og_img = await handleImageOverlay(bw_image, foregroundImageURL);
+      const finalImage = await mergeImage(
+        bw_image,
+        URL.createObjectURL(subject),
+        image.type
+      );
 
       updateGenerator({
         inputImageURL,
-        outputImageURL: og_img,
+        outputImageURL: finalImage,
         status: "success",
         height: inputImage.height,
         width: inputImage.width,
@@ -167,7 +124,6 @@ export default function Dashboard() {
           generateImage(file[0]);
         }}
       />
-      <canvas ref={canvasRef} style={{ display: "none" }}></canvas>{" "}
     </UploadContainer>
   );
 }
