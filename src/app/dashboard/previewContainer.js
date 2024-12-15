@@ -37,6 +37,25 @@ const Message = styled.div`
  */
 export default function PreviewContainer() {
   const { generation } = useContext(GeneratorContext);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [outputWidth, setOutputWidth] = useState("80vw");
+  const [outputHight, setOutputHight] = useState("80vh");
+
+  useEffect(() => {
+    const handleResize = () => setScreenWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (screenWidth <= 768) {
+      setOutputWidth("80vw");
+      setOutputHight(`${(80 * generation.height) / generation.width}vw`);
+    } else {
+      setOutputHight("80vh");
+      setOutputWidth(`${(80 * generation.width) / generation.height}vh`);
+    }
+  }, [generation, screenWidth]);
 
   switch (generation.status) {
     case "uploading":
@@ -118,10 +137,7 @@ export default function PreviewContainer() {
       return (
         <Container>
           <OutputCard>
-            <BeforeAfterImage
-              $height={"80vh"}
-              $width={`${(80 * generation.width) / generation.height}vh`}
-            >
+            <BeforeAfterImage $height={outputHight} $width={outputWidth}>
               <img src={generation.inputImageURL} />
               <img src={generation.outputImageURL} />
             </BeforeAfterImage>

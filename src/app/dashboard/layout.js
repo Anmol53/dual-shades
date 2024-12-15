@@ -91,6 +91,9 @@ const RightContainer = styled.div`
   aspect-ratio: 16/9;
   border-radius: 20px;
   color: white;
+  @media screen and (max-width: 768px) {
+    aspect-ratio: 9/16;
+  }
 `;
 
 const Footer = styled.footer`
