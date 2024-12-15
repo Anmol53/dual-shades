@@ -58,12 +58,12 @@ const faqs = [
   {
     title: "Do I need an account to use Dual Shades?",
     content:
-      "Yes, account creation is mandatory to use Dual Shades, but no payment details are required for the free tier.",
+      "Yes, creating an account is required to use Dual Shades. Every new user gets 2 lifetime credits to explore the tool for free.",
   },
   {
-    title: "What is included in the Starter Plan?",
+    title: "What happens after I use my 2 credits?",
     content:
-      "The Starter Plan is free and gives you 2 credits per month, perfect for occasional use. You can upgrade to a paid plan for unlimited credits.",
+      "Once your 2 lifetime credits are used, you’ll need to upgrade to a premium plan to continue using Dual Shades without any limitations.",
   },
   {
     title: "What is the difference between the Unlimited and Forever plans?",

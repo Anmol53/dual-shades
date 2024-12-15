@@ -100,7 +100,6 @@ export default function Pricing() {
               cta={
                 plan.type.toLowerCase() === "free" ? (
                   <Button
-                    color="#6e6e6e"
                     onClick={() => {
                       redirect("/dashboard");
                     }}

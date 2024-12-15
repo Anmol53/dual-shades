@@ -101,9 +101,9 @@ export default function PreviewContainer() {
           <Message>
             <h2>You’re out of credits. 😔</h2>
             <p>
-              You've used up all your free credits for this month. Don’t
-              worry—credits refresh monthly, or you can upgrade to a premium
-              plan for unlimited access. 🌟
+              You've used your 2 free credits. Unlock the full power of{" "}
+              <strong>Dual Shades</strong> by upgrading to a premium plan and
+              enjoy unlimited access! 🌟
             </p>
           </Message>
         </Container>

@@ -7,11 +7,11 @@ import { NextResponse } from "next/server";
  *
  * This function checks the user's subscription plan and usage statistics to determine whether they are
  * allowed to generate an image. It supports two types of plans: "free" and others. For free plans, it
- * limits the number of monthly image generations.
+ * limits the number of image generations.
  *
  * - If the user is on a non-free plan, they are always allowed to generate images.
  * - If the user is on a free plan, they are allowed to generate images up to a maximum number of
- *   allowed usages (defined by `MAX_CREDITS`) within the same month.
+ *   allowed usages (defined by `FREE_GENERATIONS_ALLOWED`).
  * - The monthly usage is reset at the beginning of each month.
  *
  * @param {Request} req - The HTTP request object containing user information.
@@ -35,10 +35,14 @@ export async function POST(req) {
     }
 
     // Define the maximum number of image generations allowed for free users
-    const MAX_CREDITS = 2;
+    const FREE_GENERATIONS_ALLOWED = process.env.FREE_GENERATIONS_ALLOWED;
 
     // If the user is not on a free plan, they can always generate images
-    if (user.plan.type !== "free") {
+    // Or trial user can generate "MAX_FREE_GENERATIONS" images
+    if (
+      user.plan.type !== "free" ||
+      FREE_GENERATIONS_ALLOWED - user.usage.total_usage > 0
+    ) {
       return NextResponse.json(
         {
           canGenerate: true,
@@ -47,34 +51,10 @@ export async function POST(req) {
       );
     }
 
-    // Extract the last usage date and current date for comparison
-    const last_usage_date = user.usage.last_used_date;
-    const currentDate = new Date();
-    const lastUsed = new Date(last_usage_date);
-
-    // If the user has already used image generation within the same month, check how many times they have used it
-    if (
-      lastUsed.getFullYear() === currentDate.getFullYear() &&
-      lastUsed.getMonth() === currentDate.getMonth()
-    ) {
-      return NextResponse.json(
-        {
-          canGenerate: MAX_CREDITS - user.usage.current_month_usage > 0,
-        },
-        { status: 200 }
-      );
-    }
-
-    // If the usage is not from the current month, reset the monthly usage counter
-    if (user.usage.current_month_usage !== 0) {
-      user.usage.current_month_usage = 0;
-      await user.save();
-    }
-
     // Return a success response allowing the user to generate images
     return NextResponse.json(
       {
-        canGenerate: true,
+        canGenerate: false,
       },
       { status: 200 }
     );

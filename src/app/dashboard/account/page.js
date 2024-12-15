@@ -44,9 +44,9 @@ export default function Account() {
   const [currentPlan, setCurrentPlan] = useState({});
   const [upgrades, setUpgrades] = useState([]);
 
-  const MAX_CREDITS = 2;
+  const FREE_GENERATIONS_ALLOWED = process.env.NEXT_PUBLIC_FREE_GENERATIONS_ALLOWED;
   const remaining_credits =
-    MAX_CREDITS - session.user.usage.current_month_usage;
+    FREE_GENERATIONS_ALLOWED - session.user.usage.total_usage;
 
   useEffect(() => {
     fetch("/api/plans/active")
